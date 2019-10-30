@@ -73,7 +73,10 @@
                 console.log(`%cRound ${gameRounds + 1}:`, "font-weight: bold");
                 playerSelection = prompt("Which weapon do you pick? Rock, Paper, or Scissors?", '');
                 
-                if (!playerSelection) return;
+                if (!playerSelection) {
+                    console.clear();
+                    return;
+                } 
 
                 switch (playerSelection.toLowerCase()) {
                     case "rock":
