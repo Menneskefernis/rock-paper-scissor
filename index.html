@@ -66,25 +66,25 @@
 
         function game() {
             let playerSelection;
-            let nrOfGames = 0;
+            let gameRounds = 0;
             const resultStyle = "color: white; font-size: 20px;";
-
-            while (nrOfGames < 5) {
-                console.log(`%cRound ${nrOfGames + 1}:`, "font-weight: bold");
+            
+            while (gameRounds < 5) {
+                console.log(`%cRound ${gameRounds + 1}:`, "font-weight: bold");
                 playerSelection = prompt("Which weapon do you pick? Rock, Paper, or Scissors?", '');
                 
-                if (playerSelection) {
-                    switch (playerSelection.toLowerCase()) {
-                        case "rock":
-                        case "paper":
-                        case "scissors":
-                            console.log(`%c${playRound(playerSelection, computerPlay())}`, `color: ${styleColor}`);
-                            console.log(`Player: ${playerScore}, Computer: ${computerScore}`);
-                            nrOfGames++;
-                            break;
-                        default:
-                            alert("You have to submit a valid value!");
-                    }
+                if (!playerSelection) return;
+
+                switch (playerSelection.toLowerCase()) {
+                    case "rock":
+                    case "paper":
+                    case "scissors":
+                        console.log(`%c${playRound(playerSelection, computerPlay())}`, `color: ${styleColor}`);
+                        console.log(`Player: ${playerScore}, Computer: ${computerScore}`);
+                        gameRounds++;
+                        break;
+                    default:
+                        alert("You have to submit a valid value!");
                 }
             }
             
