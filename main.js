@@ -1,5 +1,7 @@
 "use strict";
 
+const gameChoices = document.querySelectorAll('.game-choice');
+
 let computerScore = 0;
 let playerScore = 0;
 let styleColor;
@@ -93,3 +95,9 @@ function game() {
 }
 
 //game();
+
+function startGame() {
+    console.log('clicked');
+}
+
+gameChoices.forEach(choice => choice.addEventListener('click', startGame));
