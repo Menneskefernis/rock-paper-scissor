@@ -42,7 +42,7 @@ table {
 	border-spacing: 0;
 }
 
-body {
+#wrapper {
     width: 1100px;
     margin: 0 auto;
     font-family: 'Courgette', sans-serif;
@@ -50,7 +50,7 @@ body {
 
 header {
     text-align: center;
-    margin: 90px auto 70px;
+    margin: 50px auto 70px;
 }
 
 header h1 {
@@ -78,22 +78,19 @@ main div {
 div#rock div {
     width: 180px;
     height: 153px;
-    /*border: 1px black solid;*/
-    background: url('./selections1.png') 206px -96px;
+    background: url('./selections.png') 206px -96px;
 }
 
 div#paper div {
-    width: 245px;
+    width: 250px;
     height: 210px;
-    /*border: 1px black solid;*/
-    background: url('./selections1.png') 495px 253px;
+    background: url('./selections.png') 500px 253px;
 }
 
 div#scissors div {
     width: 240px;
     height: 170px;
-    /*border: 1px black solid;*/
-    background: url('./selections1.png') -27px -27px;
+    background: url('./selections.png') -27px -27px;
 }
 
 footer p {
@@ -109,9 +106,51 @@ footer p {
     width: 300px;
     box-shadow: 0 3px 7px 5px;
     cursor: pointer;
+    transition: all 0.3s;
+}
+
+.game-choice:hover {
+    transform: scale(1.01);
+}
+
+.game-choice div {
+    transition: all 0.3s;
+}
+
+.game-choice:hover div {
+    transform: scale(1.02);
+    filter: drop-shadow(0 0 7px #222);
+}
+
+.game-choice:active {
+    box-shadow: 0 1px 5px 3px;
+}
+
+.game-choice:active div{
+    transform: scale(1.05);
 }
 
 #results {
     display: flex;
     justify-content: space-between;
+}
+
+#reset {
+    background-color: green;
+    border: none;
+    border-radius: 0 0 7px 0;
+    color: darkseagreen;
+    padding: 3px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#reset:hover {
+    color: #fff;
+}
+
+#reset:active {
+    background-color: darkgreen;
+    color: seagreen;
 }

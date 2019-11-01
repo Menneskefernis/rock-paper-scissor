@@ -10,29 +10,31 @@
     <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Rock, Paper, Scissors!</h1>
-        <p>What is your weapon?</p>
-    </header>
-    <main>
-        <div id="rock" class="game-choice">
-            <div></div>
-        </div>
-        <div id="paper" class="game-choice">
-            <div></div>
-        </div>
-        <div id="scissors" class="game-choice">
-            <div></div>
-        </div>    
-    </main>
-    <footer>
-        <p>Round 1!</p>
-        <div id="results">
-            <p>Player:</p>
-            <p>Computer:</p>
-        </div>
-    </footer>
-
+    <button id="reset">Reset Game!<br>(and start a new)</button>
+    <div id="wrapper">
+        <header>
+            <h1>Rock, Paper, Scissors!</h1>
+            <p>What is your weapon?</p>
+        </header>
+        <main>
+            <div id="rock" class="game-choice">
+                <div></div>
+            </div>
+            <div id="paper" class="game-choice">
+                <div></div>
+            </div>
+            <div id="scissors" class="game-choice">
+                <div></div>
+            </div>    
+        </main>
+        <footer>
+            <p id="rounds">Round 1!</p>
+            <div id="results">
+                <p id="player" class="result">Player: 0</p>
+                <p id="computer" class="result">Computer: 0</p>
+            </div>
+        </footer>
+    </div>
     <script src="./main.js"></script>
 </body>
 </html>

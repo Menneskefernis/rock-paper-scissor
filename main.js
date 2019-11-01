@@ -1,10 +1,15 @@
 "use strict";
 
 const gameChoices = document.querySelectorAll('.game-choice');
+const statusParagraph = document.getElementById('rounds');
+const player = document.getElementById('player');
+const computer = document.getElementById('computer');
+const reset = document.getElementById('reset');
 
 let computerScore = 0;
 let playerScore = 0;
-let styleColor;
+let gameRound = 1;
+let winner;
         
 function computerPlay() {
 const rand = Math.floor(Math.random() * 3);
@@ -34,70 +39,86 @@ function playRound(playerSelection, computerSelection) {
         case playerSelection === "Paper" && computerSelection === "Rock":
         case playerSelection === "Scissors" && computerSelection === "Paper":
             playerScore++;
-            styleColor = "green";
+            winner = 'player';
+            
             return `You Win! ${playerSelection} ${setSingularPlural(playerSelection)} ${computerSelection}!`;
-            break;
         case computerSelection === "Rock" && playerSelection === "Scissors":
         case computerSelection === "Paper" && playerSelection === "Rock":
         case computerSelection === "Scissors" && playerSelection === "Paper":
             computerScore++;
-            styleColor = "red";
-            return `You Lose! ${computerSelection} ${setSingularPlural(playerSelection)} ${playerSelection}!`;
-            break;
+            winner = 'computer';
+
+            return `You Lose! ${computerSelection} ${setSingularPlural(computerSelection)} ${playerSelection}!`;
         default:
-            styleColor = "blue";
             return `${playerSelection} vs ${computerSelection}! It's a draw!`;
     }          
 }
 
-function setSingularPlural(playerSelection) {
-    if (playerSelection === "Scissors") {
+function setSingularPlural(selection) {
+    selection = selection.toLowerCase();
+
+    if (selection === "scissors") {
         return "beat";
     } else {
         return "beats";
     }
 }
 
-function game() {
-    let playerSelection;
-    let gameRounds = 0;
-    const resultStyle = "color: white; font-size: 20px;";
-            
-    while (gameRounds < 5) {
-        console.log(`%cRound ${gameRounds + 1}:`, "font-weight: bold");
-        playerSelection = prompt("Which weapon do you pick? Rock, Paper, or Scissors?", '');
-                
-        if (!playerSelection) {
-            console.clear();
-            return;
-        } 
+function playGame() {
+    if (gameRound >= 5) return;
 
-        switch (playerSelection.toLowerCase()) {
-            case "rock":
-            case "paper":
-            case "scissors":
-                console.log(`%c${playRound(playerSelection, computerPlay())}`, `color: ${styleColor}`);
-                console.log(`Player: ${playerScore}, Computer: ${computerScore}`);
-                gameRounds++;
-                break;
-            default:
-                alert("You have to submit a valid value!");
-        }
-    }
-            
-    if (playerScore > computerScore) {
-        console.log("%cYOU WON! YOU'RE A WINNER!", `${resultStyle} background-color: green;`);
-    } else if (playerScore < computerScore) {
-        console.log("%cYOU LOST! YOU ARE A LOSER!", `${resultStyle} background-color: red;`);
+    const playerSelection = this.id;
+    
+    statusParagraph.textContent = `Round ${gameRound + 1}!`;
+    statusParagraph.textContent = `${playRound(playerSelection,computerPlay())}`;
+    updateScores();
+    gameRound++;
+     
+    if (gameRound < 5) {
+        setTimeout(function() {
+            if (gameRound < 5) {
+                statusParagraph.textContent = `Round ${gameRound + 1}!`;
+            }
+        }, 2000);
     } else {
-        console.log("%cIt's a draw...", `${resultStyle} background-color: blue;`);
+        setTimeout(function() {
+            setWinner();
+        }, 2000);
+        
+        setTimeout(function() {
+            resetGame();
+        }, 5000);
+    }    
+}
+
+function updateScores() {
+    if (winner === 'player') {
+        player.textContent = `Player: ${playerScore}`;
+    }
+
+    if (winner === 'computer') {
+        computer.textContent = `Computer: ${computerScore}`;
     }
 }
 
-//game();
-
-function startGame() {
-    console.log('clicked');
+function setWinner() {
+    if (playerScore > computerScore) {
+        statusParagraph.textContent = "YOU WON! YOU'RE A WINNER!";
+    } else if (playerScore < computerScore) {
+        statusParagraph.textContent = "YOU LOST! YOU ARE A LOSER!";
+    } else {
+        statusParagraph.textContent = "IT'S A DRAW!";
+    }
 }
 
-gameChoices.forEach(choice => choice.addEventListener('click', startGame));
+function resetGame() {
+    statusParagraph.textContent = "Round 1!";
+    player.textContent = "Player: 0";
+    computer.textContent = "Computer: 0";
+    gameRound = 0;
+    playerScore = 0;
+    computerScore = 0;
+}
+
+gameChoices.forEach(choice => choice.addEventListener('click', playGame));
+reset.addEventListener('click', resetGame);
